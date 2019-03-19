@@ -1,13 +1,12 @@
-import Hello from "./components/hello"
-
-const components = [
-  Hello
-]
+import components from './components'
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 
 const install = function (Vue, options) {
   components.map(component => {
     Vue.component(component.name, component);
   })
+  Vue.use(Element)
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
