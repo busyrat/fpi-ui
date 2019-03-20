@@ -1,7 +1,7 @@
 export const importCSS = (url) => {
-    let link = document.createElement("link")
+    let link = window.document.createElement("link")
     link.type = 'text/css'
     link.rel="stylesheet"
     link.href = url
-    document.getElementsByTagName('head')[0].appendChild(link)
+    window.document.getElementsByTagName('head')[0].appendChild(link)
 }

@@ -6,7 +6,6 @@ import "./styles/fpi.styl"
 import './styles/perfect-scrollbar.css'
 
 import { importCSS } from './utils'
-importCSS('http://at.alicdn.com/t/font_653301_sblyj1jdu3.css')
 
 const install = function (Vue, options) {
   components.map(component => {
@@ -17,6 +16,7 @@ const install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
+  importCSS('http://at.alicdn.com/t/font_653301_sblyj1jdu3.css')
 }
 
 export default {
