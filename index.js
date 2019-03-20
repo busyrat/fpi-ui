@@ -5,8 +5,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 import "./styles/fpi.styl"
 import './styles/perfect-scrollbar.css'
 
-import { importCSS } from './utils'
-
 const install = function (Vue, options) {
   components.map(component => {
     Vue.component(component.name, component);
@@ -16,7 +14,6 @@ const install = function (Vue, options) {
 
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
-  importCSS('http://at.alicdn.com/t/font_653301_sblyj1jdu3.css')
 }
 
 export default {
