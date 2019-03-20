@@ -1,5 +1,6 @@
 import Hello from "./hello"
+import Tree from './tree'
 
 export default [
-  Hello
+  Hello, Tree
 ]

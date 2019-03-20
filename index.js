@@ -2,11 +2,17 @@ import components from './components'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 
+import "./styles/fpi.styl"
+import './styles/perfect-scrollbar.css'
+
+import { importCSS } from './utils'
+importCSS('http://at.alicdn.com/t/font_653301_sblyj1jdu3.css')
+
 const install = function (Vue, options) {
   components.map(component => {
     Vue.component(component.name, component);
   })
-  Vue.use(Element)
+  Vue.use(Element, { size: 'small' });
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
