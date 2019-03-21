@@ -31,6 +31,7 @@
             :render-content="renderContent"
             @node-click="nodeClick"
             :filter-node-method="onFilter"
+            :props="elProps"
         )
 </template>
 
@@ -48,7 +49,7 @@ export default {
     props: {
         //数据源， 会经过 transform 变成 localData
         data: {
-            default: () => demoData,
+            default: () => ([]),
             type: Array
         },
         options: {
@@ -62,14 +63,6 @@ export default {
         renderAttachedNode: {
             type: Function,
             default: undefined
-        },
-        /**
-         * 节点点击时候的回调函数
-         * (data) => void
-         */
-        onNodeClick: {
-            type: Function,
-            default: () => {}
         },
         /** 
          * 默认选中的节点 key，和 options.keyProp 有关
@@ -108,6 +101,11 @@ export default {
                 keyProp: 'id|ID|Id'
             } 
             return { ...defaultOption, ...this.options }
+        },
+        elProps() {
+            return {
+                children: this.defaultDataOption.childrenProp
+            }
         }
     },
 
@@ -142,7 +140,7 @@ export default {
             } else {
                 console.log('[i-tree]:', 'normal node be clicked')
             }
-            this.$emit('onNodeClick', data)
+            this.$emit('nodeClick', data)
         },
         /**
          * 使用 nodeLabelProp 和 attachedLabelProp 两个属性的值作为 node 的唯一性字段
@@ -217,7 +215,6 @@ export default {
 
     beforeMount() {
         this.transformSourceData()
-
     },
 
     mounted() {
@@ -227,75 +224,8 @@ export default {
              * 这个和 keyProp 有关
              */
             this.$refs.elTree.setCurrentKey(this.selectedNode ? this.selectedNode[this.getKey(this.selectedNode)] : this.defaultSelectedKey)
-            this.selectedNode && this.$emit('onDefaultSelected', this.selectedNode)
+            this.selectedNode && this.$emit('defaultSelected', this.selectedNode)
         })
     }
 }
-
-const demoData = [{
-    id: 1,
-    label: '一级 1',
-    sites: [{
-            siteName: '站点 1',
-            status: 'online'
-        },{
-            siteName: '站点 2',
-            status: 'offline'
-        }],
-        children: [{
-            id: 9,
-            label: '三级 1-1-1'
-        }, {
-            id: 10,
-            label: '三级 1-1-2'
-        }],
-    children: [{
-        id: 4,
-        label: '二级 1-1',
-        sites: [{
-            siteName: '站点 1',
-            status: 'online'
-        },{
-            siteName: '站点 2',
-            status: 'offline'
-        }],
-        children: [{
-            id: 9,
-            label: '三级 1-1-1'
-        }, {
-            id: 10,
-            label: '三级 1-1-2'
-        }]
-    }]
-}, {
-    id: 2,
-    label: '一级 2',
-    children: [{
-        id: 5,
-        label: '二级 2-1'
-    }, {
-        id: 6,
-        label: '二级 2-2'
-    }]
-}, {
-    id: 3,
-    label: '一级 3',
-    children: [{
-        id: 7,
-        label: '二级 3-1'
-    }, {
-        id: 8,
-        label: '二级 3-2',
-        children: [{
-            id: 11,
-            label: '三级 3-2-1'
-        }, {
-            id: 12,
-            label: '三级 3-2-2'
-        }, {
-            id: 13,
-            label: '三级 3-2-3'
-        }]
-    }]
-}]
 </script>

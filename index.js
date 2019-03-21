@@ -3,13 +3,12 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 
 import "./styles/fpi.styl"
-import './styles/perfect-scrollbar.css'
 
 const install = function (Vue, options) {
   components.map(component => {
     Vue.component(component.name, component);
   })
-  Vue.use(Element, { size: 'small' });
+  Vue.use(Element, { size: 'mini' });
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
